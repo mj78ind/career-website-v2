@@ -8,3 +8,20 @@ engine = create_engine(db_connection_string,
                           "ssl_ca": "/etc/ssl/cert.pem"
                         }
                       })
+
+with engine.connect() as conn:
+  result = conn.execute(text("select * from jobs"))
+
+  result_dicts = []
+  for row in result.all():
+    column_names = result.keys() 
+    first_result_dict = dict(zip(column_names, row))
+    result_dicts.append(first_result_dict)
+
+  print(result_dicts)
+    
+
+  
+  
+  
+
